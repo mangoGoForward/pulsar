@@ -51,3 +51,36 @@ jobs:
         uses: mangoGoForward/pulsar-test-infra/docbot/cmd/title-check@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            improve
+            fix
+            cleanup
+            revert
+          scopes: |
+            admin
+            cli
+            io
+            fn
+            meta
+            monitor
+            proxy
+            schema
+            sec
+            sql
+            storage
+            offload
+            txn
+            java
+            cpp
+            py
+            ws
+            test
+            ci
+            build
+            misc
+            doc
+            blog
+            site
+          headerPattern: '^(?:\[(\w+)\])?(?:\[(\w+)\])? (.+)$'
