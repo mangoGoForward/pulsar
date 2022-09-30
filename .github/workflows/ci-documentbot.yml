@@ -33,34 +33,21 @@ concurrency:
 
 jobs:
   label:
-    if: ${{ github.repository == 'apache/pulsar' }}
-    permissions:
-      pull-requests: write 
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Labeling
-        uses: apache/pulsar-test-infra/docbot@master
+        uses: mangoGoForward/pulsar-test-infra/docbot/cmd/label@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LABEL_WATCH_LIST: 'doc,doc-required,doc-not-needed,doc-complete'
           LABEL_MISSING: 'doc-label-missing'
 
-  check-pr-title:
-    if: github.event.action == 'opened' || github.event.action == 'edited'
-    name: Check PR title
+  title-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          repository: mangoGoForward/pulsar-test-infra
-      - name: Setup Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.18
-      - name: Execute
-        run: go run . title check
-        shell: bash
-        working-directory: docbot
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validating PR Title
+        uses: mangoGoForward/pulsar-test-infra/docbot/cmd/title-check@master
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
