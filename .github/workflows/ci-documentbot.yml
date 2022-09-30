@@ -47,7 +47,7 @@ jobs:
   title-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Validating PR Title
+      - name: Check PR Title
         uses: mangoGoForward/pulsar-test-infra/docbot/cmd/title-check@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
